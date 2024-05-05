@@ -56,5 +56,27 @@
     <a name="circuit" val="main"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="simulationFrequency" val="1.0"/>
+    <comp lib="4" loc="(170,350)" name="Register">
+      <a name="appearance" val="logisim_evolution"/>
+      <a name="width" val="32"/>
+    </comp>
+  </circuit>
+  <circuit name="interger_register_file">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="interger_register_file"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+  </circuit>
+  <circuit name="fp_register_file">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="fp_register_file"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
+  </circuit>
+  <circuit name="vector_register_file">
+    <a name="appearance" val="logisim_evolution"/>
+    <a name="circuit" val="vector_register_file"/>
+    <a name="circuitnamedboxfixedsize" val="true"/>
+    <a name="simulationFrequency" val="1.0"/>
   </circuit>
 </project>
