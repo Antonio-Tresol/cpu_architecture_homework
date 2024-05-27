@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project version="1.8.10" name="DirectMappedCache">
+  <circuit name="DirectMappedCache">
+    <a name="circuit:DirectMappedCache" />
+    <a name="width" val="32" />
+    <a name="circuit:RAM" />
+    <a name="addressBits" val="8" />
+    <a name="dataBits" val="32" />
+    <comp lib="0" loc="(120,160)" name="Register">
+      <a name="width" val="8" />
+      <a name="label" val="Address" />
+    </comp>
+    <comp lib="0" loc="(224,160)" name="Splitter">
+      <a name="fanout" val="3" />
+      <a name="incoming" val="8" />
+      <a name="bit0" val="0" />
+      <a name="bit1" val="0" />
+      <a name="bit2" val="1" />
+      <a name="bit3" val="1" />
+      <a name="bit4" val="2" />
+      <a name="bit5" val="2" />
+      <a name="bit6" val="3" />
+      <a name="bit7" val="3" />
+    </comp>
+    <comp lib="0" loc="(368,144)" name="RAM">
+      <a name="addrWidth" val="2" />
+      <a name="dataWidth" val="32" />
+    </comp>
+    <comp lib="0" loc="(528,160)" name="Multiplexer">
+      <a name="width" val="32" />
+      <a name="select" val="1" />
+    </comp>
+    <comp lib="0" loc="(640,160)" name="Register">
+      <a name="width" val="32" />
+      <a name="label" val="Data Out" />
+    </comp>
+    <comp lib="0" loc="(368,224)" name="RAM">
+      <a name="addrWidth" val="2" />
+      <a name="dataWidth" val="6" />
+    </comp>
+    <comp lib="0" loc="(224,240)" name="Splitter">
+      <a name="fanout" val="2" />
+      <a name="incoming" val="8" />
+      <a name="bit0" val="0" />
+      <a name="bit1" val="0" />
+      <a name="bit2" val="1" />
+      <a name="bit3" val="1" />
+      <a name="bit4" val="2" />
+      <a name="bit5" val="2" />
+      <a name="bit6" val="3" />
+      <a name="bit7" val="3" />
+    </comp>
+    <comp lib="0" loc="(368,304)" name="Register">
+      <a name="width" val="2" />
+      <a name="label" val="FIFO Counter" />
+    </comp>
+    <comp lib="0" loc="(480,304)" name="Multiplexer">
+      <a name="width" val="2" />
+    </comp>
+    <comp lib="0" loc="(480,256)" name="Comparator">
+      <a name="width" val="6" />
+    </comp>
+    <comp lib="0" loc="(80,160)" name="Tunnel">
+      <a name="label" val="Address" />
+      <a name="width" val="8" />
+    </comp>
+    <comp lib="0" loc="(640,192)" name="Tunnel">
+      <a name="label" val="Data Out" />
+      <a name="width" val="32" />
+    </comp>
+    <comp lib="memory" loc="(768,144)" name="RAM">
+      <a name="addrWidth" val="8" />
+      <a name="dataWidth" val="32" />
+    </comp>
+    <comp lib="0" loc="(288,368)" name="Constant">
+      <a name="width" val="2" />
+      <a name="value" val="00000001" />
+    </comp>
+    <comp lib="0" loc="(416,368)" name="Adder">
+      <a name="width" val="2" />
+    </comp>
+    <comp lib="0" loc="(576,304)" name="Tunnel">
+      <a name="facing" val="west" />
+      <a name="label" val="Write Enable" />
+    </comp>
+    <comp lib="0" loc="(576,256)" name="Tunnel">
+      <a name="facing" val="west" />
+      <a name="label" val="Hit" />
+    </comp>
+    <comp lib="0" loc="(768,208)" name="Tunnel">
+      <a name="facing" val="west" />
+      <a name="label" val="Data In" />
+      <a name="width" val="32" />
+    </comp>
+    <wire from="(120,160)" to="(192,160)" />
+    <wire from="(224,160)" to="(288,160)" />
+    <wire from="(288,144)" to="(368,144)" />
+    <wire from="(288,176)" to="(368,176)" />
+    <wire from="(368,144)" to="(464,144)" />
+    <wire from="(464,144)" to="(464,160)" />
+    <wire from="(464,160)" to="(528,160)" />
+    <wire from="(528,160)" to="(592,160)" />
+    <wire from="(592,160)" to="(640,160)" />
+    <wire from="(368,224)" to="(464,224)" />
+    <wire from="(224,240)" to="(288,240)" />
+    <wire from="(288,224)" to="(368,224)" />
+    <wire from="(288,256)" to="(368,256)" />
+    <wire from="(368,304)" to="(416,304)" />
+    <wire from="(416,304)" to="(480,304)" />
+    <wire from="(480,304)" to="(544,304)" />
+    <wire from="(480,256)" to="(544,256)" />
+    <wire from="(80,160)" to="(120,160)" />
+    <wire from="(640,192)" to="(672,192)" />
+    <wire from="(736,160)" to="(768,160)" />
+    <wire from="(288,368)" to="(416,368)" />
+    <wire from="(416,352)" to="(480,352)" />
+    <wire from="(416,368)" to="(416,352)" />
+    <wire from="(768,160)" to="(792,160)" />
+    <wire from="(768,208)" to="(792,208)" />
+  </circuit>
+</project>

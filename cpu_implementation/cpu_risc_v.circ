@@ -119,6 +119,9 @@
     <comp lib="2" loc="(990,1510)" name="Multiplexer">
       <a name="width" val="32"/>
     </comp>
+    <comp lib="4" loc="(370,160)" name="RAM">
+      <a name="appearance" val="logisim_evolution"/>
+    </comp>
     <comp loc="(1180,1380)" name="FPALU"/>
     <comp loc="(1180,1490)" name="ALU"/>
     <comp loc="(1180,1600)" name="CU"/>
@@ -6611,7 +6614,7 @@
       <a name="output" val="true"/>
       <a name="width" val="2"/>
     </comp>
-    <comp lib="8" loc="(356,356)" name="Text">
+    <comp lib="8" loc="(355,355)" name="Text">
       <a name="text" val="identifies FMIN ||FSGNJ || FSGNJN -|| FSGNJX - || FMINAX || FEQ || FLT || FLE"/>
     </comp>
     <comp loc="(520,280)" name="mmnsc_bit_stream_detector">
@@ -6670,6 +6673,13 @@
     <wire from="(330,320)" to="(330,330)"/>
     <wire from="(350,310)" to="(380,310)"/>
   </circuit>
+  <circuit name="Cache">
+    <a name="circuit" val="Cache"/>
+    <a name="simulationFrequency" val="1.0"/>
+    <comp lib="4" loc="(50,160)" name="RAM">
+      <a name="appearance" val="classic"/>
+    </comp>
+  </circuit>
   <vhdl name="mmnsc_bit_stream_detector">--------------------------------------------------------------------------------
 -- Project : cpu_risc_v
 -- File    : mmnsc_bit_stream_detector
@@ -6713,4 +6723,5 @@ begin
     end process;
 end architecture behavioral;
 </vhdl>
+  <vhdl name="cache_block">   </vhdl>
 </project>
