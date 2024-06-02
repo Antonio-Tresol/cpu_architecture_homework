@@ -329,7 +329,7 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
     <a name="simulationFrequency" val="1.0"/>
     <appear>
       <rect fill="#db9656" height="320" rx="10" ry="10" stroke="#000000" stroke-width="2" width="40" x="360" y="150"/>
-      <text dominant-baseline="central" font-family="SansSerif" font-size="12" font-weight="bold" text-anchor="middle" x="380" y="304">ID/EX</text>
+      <text dominant-baseline="central" font-family="SansSerif" font-size="12" font-weight="bold" text-anchor="middle" x="380" y="304">IF/ID</text>
       <circ-anchor facing="east" x="400" y="240"/>
       <circ-port dir="in" pin="830,1100" x="360" y="170"/>
       <circ-port dir="in" pin="850,1160" x="360" y="450"/>
