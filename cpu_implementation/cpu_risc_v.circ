@@ -162,12 +162,12 @@
     </comp>
     <comp lib="0" loc="(1990,710)" name="Tunnel">
       <a name="facing" val="south"/>
-      <a name="label" val="Write_F"/>
+      <a name="label" val="Write_V"/>
       <a name="labelfont" val="SansSerif bold 6"/>
     </comp>
     <comp lib="0" loc="(2020,710)" name="Tunnel">
       <a name="facing" val="south"/>
-      <a name="label" val="Write_V"/>
+      <a name="label" val="Write_F"/>
       <a name="labelfont" val="SansSerif bold 6"/>
     </comp>
     <comp lib="0" loc="(240,770)" name="Clock"/>
