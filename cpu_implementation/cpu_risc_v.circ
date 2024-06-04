@@ -8113,9 +8113,44 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
   <circuit name="Cache">
     <a name="circuit" val="Cache"/>
     <a name="simulationFrequency" val="1.0"/>
-    <comp lib="4" loc="(50,160)" name="RAM">
+    <comp lib="0" loc="(100,490)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(170,460)" name="Pin">
       <a name="appearance" val="classic"/>
     </comp>
+    <comp lib="0" loc="(180,420)" name="Clock">
+      <a name="facing" val="north"/>
+    </comp>
+    <comp lib="4" loc="(40,570)" name="RAM">
+      <a name="addrWidth" val="24"/>
+      <a name="appearance" val="classic"/>
+      <a name="dataWidth" val="64"/>
+    </comp>
+    <comp loc="(1170,460)" name="cache_memory">
+      <a name="appearance" val="logisim_evolution"/>
+    </comp>
+    <wire from="(100,490)" to="(520,490)"/>
+    <wire from="(170,460)" to="(930,460)"/>
+    <wire from="(180,420)" to="(490,420)"/>
+    <wire from="(280,660)" to="(480,660)"/>
+    <wire from="(40,490)" to="(100,490)"/>
+    <wire from="(40,490)" to="(40,580)"/>
+    <wire from="(480,500)" to="(480,660)"/>
+    <wire from="(480,500)" to="(910,500)"/>
+    <wire from="(490,420)" to="(490,440)"/>
+    <wire from="(490,440)" to="(940,440)"/>
+    <wire from="(520,470)" to="(520,490)"/>
+    <wire from="(520,470)" to="(920,470)"/>
+    <wire from="(910,500)" to="(910,520)"/>
+    <wire from="(910,520)" to="(950,520)"/>
+    <wire from="(920,470)" to="(920,500)"/>
+    <wire from="(920,500)" to="(950,500)"/>
+    <wire from="(930,460)" to="(930,480)"/>
+    <wire from="(930,480)" to="(950,480)"/>
+    <wire from="(940,440)" to="(940,460)"/>
+    <wire from="(940,460)" to="(950,460)"/>
   </circuit>
   <circuit name="fp_convert_reducer">
     <a name="appearance" val="custom"/>
@@ -8984,4 +9019,109 @@ begin
   end process;
 end architecture behavioral;
 </vhdl>
+  <vhdl name="cache_memory">library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity cache_memory is
+    port (
+        clk         : in  std_logic;
+        reset       : in  std_logic;
+        cpu_address : in  std_logic_vector(31 downto 0); -- CPU address (assume 32-bit)
+        cpu_read    : in  std_logic;                     -- CPU read request
+        cpu_data_out: out std_logic_vector(63 downto 0); -- 64-bit data output to CPU
+
+        ram_address : out std_logic_vector(31 downto 0); -- Address output to RAM
+        ram_data_in : in  std_logic_vector(31 downto 0); -- 32-bit data input from RAM
+        ram_read    : out std_logic                      -- Read enable signal to RAM
+    );
+end entity cache_memory;
+
+architecture rtl of cache_memory is
+    -- Constants
+    constant PAGE_SIZE    : integer := 1024; -- Size of a page in bits
+    constant WORDS_PER_PAGE : integer := PAGE_SIZE / 32; -- Number of 32-bit words per page
+    constant CACHE_LINES  : integer := 4;    -- Number of cache lines (pages)
+
+    -- Types
+    type cache_line_type is record
+        valid : std_logic;
+        tag   : std_logic_vector(26 downto 0); -- Tag bits (32 - 2 (address) - 3 (word offset))
+        data  : std_logic_vector(PAGE_SIZE-1 downto 0);
+    end record;
+    type cache_array_type is array (0 to CACHE_LINES-1) of cache_line_type;
+
+    -- Signals
+    signal cache         : cache_array_type;
+    signal cache_address : std_logic_vector(1 downto 0); -- Address within the cache (2 bits)
+    signal word_offset   : std_logic_vector(2 downto 0); -- Word offset within a page (3 bits)
+    signal cache_hit     : std_logic;
+    signal output_word   : std_logic_vector(31 downto 0); -- Temporary 32-bit word output
+    signal ram_read_int  : std_logic;                      -- Intermediate signal for ram_read
+
+begin
+
+    -- Address decoding
+    cache_address &lt;= cpu_address(3 downto 2); -- Extract cache address bits
+    word_offset   &lt;= cpu_address(4 downto 2); -- Extract word offset bits
+
+    -- Cache hit logic
+    cache_hit &lt;= '1' when cache(to_integer(unsigned(cache_address))).valid = '1' and
+                        cache(to_integer(unsigned(cache_address))).tag = cpu_address(31 downto 5)
+                else '0';
+
+    -- RAM control process
+    process (clk, reset)
+    begin
+        if reset = '1' then
+            ram_read_int &lt;= '0';
+        elsif rising_edge(clk) then
+            if cpu_read = '1' and cache_hit = '0' then -- Cache miss, read from RAM
+                ram_read_int &lt;= '1';
+                ram_address &lt;= cpu_address(31 downto 5) &amp; "00000"; -- Page address in RAM
+            else
+                ram_read_int &lt;= '0';
+            end if;
+        end if;
+    end process;
+
+    -- Cache data loading process
+    process (clk, reset)
+    begin
+        if reset = '1' then
+            for i in cache'range loop
+                cache(i).valid &lt;= '0';
+            end loop;
+        elsif rising_edge(clk) then
+            if ram_read_int = '1' then -- Loading data from RAM
+                cache(to_integer(unsigned(cache_address))).data((to_integer(unsigned(word_offset))+1)*32-1 downto to_integer(unsigned(word_offset))*32) &lt;= ram_data_in;
+                if word_offset = "111" then -- Last word of the page loaded
+                    cache(to_integer(unsigned(cache_address))).valid &lt;= '1';
+                    cache(to_integer(unsigned(cache_address))).tag   &lt;= cpu_address(31 downto 5);
+                end if;
+            end if;
+        end if;
+    end process;
+
+    -- Data output to CPU
+    process (clk)
+    begin
+        if rising_edge(clk) then
+            if cpu_read = '1' then
+                if cache_hit = '1' then
+                    output_word &lt;= cache(to_integer(unsigned(cache_address))).data((to_integer(unsigned(word_offset))+1)*32-1 downto to_integer(unsigned(word_offset))*32);
+                else
+                    output_word &lt;= (others =&gt; '0'); -- Default output on cache miss (can be improved)
+                end if;
+            end if;
+        end if;
+    end process;
+
+    -- Assemble 64-bit output from two 32-bit words
+    cpu_data_out &lt;= cache(to_integer(unsigned(cache_address))).data((to_integer(unsigned(word_offset))+2)*32-1 downto (to_integer(unsigned(word_offset))+1)*32) &amp; output_word;
+
+    -- Assign intermediate signal to output port
+    ram_read &lt;= ram_read_int;
+
+end architecture rtl;</vhdl>
 </project>
