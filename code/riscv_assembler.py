@@ -47,9 +47,41 @@ def binary_encode_rv32i_line(instruction: str, readable: bool = False) -> str:
         encoding = binary_encode_rv32i_r_format(parts=parts)
     elif format == "S":
         encoding = binary_encode_rv32i_s_format(parts=parts)
+    elif format == "U":
+        encoding = binary_encode_rv32i_u_format(parts=parts)
+    elif format == "B":
+        encoding = binary_encode_rv32i_b_format(parts=parts)
     if not readable:
         encoding = encoding.replace(" ", "")
     return encoding
+
+
+def binary_encode_rv32i_b_format(parts: List[str]) -> str:
+    """Encodes a B-format (branch) RISC-V instruction.
+
+    Parameters
+    ----------
+    parts : List[str]
+        The instruction parts, split by spaces and stripped of commas.
+
+    Returns
+    -------
+    str
+        The 32-bit binary representation of the B-format instruction.
+
+    """
+    instruction = parts[0]
+    rs1 = parts[1]
+    rs2 = parts[2]
+    imm = parts[3]
+
+    opcode = RV32I_INSTRUCTION_INFO_MAP.get(instruction)["opcode"]
+    rs1_encoding = INT_REGISTER_TO_BINARY_MAP.get(rs1)
+    rs2_encoding = INT_REGISTER_TO_BINARY_MAP.get(rs2)
+    funct3 = RV32I_FUNCT3.get(instruction)
+    imm_encoding = int_to_binary(imm, 13)  # 0 0 000000 00011
+
+    return f"{imm_encoding[0]}{imm_encoding[2:8]} {rs2_encoding} {rs1_encoding} {funct3} {imm_encoding[8:12]}{imm_encoding[1]} {opcode}"
 
 
 def binary_encode_rv32i_u_format(parts: List[str]) -> str:

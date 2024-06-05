@@ -53,8 +53,15 @@ def test_binary_encode_rv32i_s_format():
 
 def test_binary_encode_rv32i_u_format():
     assert (
-        binary_encode_rv32i_u_format(parts=["lui", "x1", "0x80000"])
-        == "10000000000000000000000000000011"
+        binary_encode_rv32i_u_format(parts=["lui", "x1", "524288"])
+        == "10000000000000000000 00001 0110111"
+    )
+
+
+def test_binary_encode_rv32i_b_format():
+    assert (
+        binary_encode_rv32i_b_format(parts=["beq", "x4", "x5", "0"])
+        == "0000000 00101 00100 000 00000 1100011"
     )
 
 
