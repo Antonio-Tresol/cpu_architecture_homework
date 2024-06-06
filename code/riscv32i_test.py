@@ -318,5 +318,61 @@ def test_binary_encode_rv32i_line_and():
     )
 
 
+def test_binary_encode_rv32i_line_mul():
+    assert (
+        binary_encode_rv32i_line("mul x1, x2, x3", readable=True)
+        == "0000001 00011 00010 000 00001 0110011"
+    )
+
+
+def test_binary_encode_rv32i_line_mulh():
+    assert (
+        binary_encode_rv32i_line("mulh x4, x5, x6", readable=True)
+        == "0000001 00110 00101 001 00100 0110011"
+    )
+
+
+def test_binary_encode_rv32i_line_mulhsu():
+    assert (
+        binary_encode_rv32i_line("mulhsu x7, x8, x9", readable=True)
+        == "0000001 01001 01000 010 00111 0110011"
+    )
+
+
+def test_binary_encode_rv32i_line_mulhu():
+    assert (
+        binary_encode_rv32i_line("mulhu x10, x11, x12", readable=True)
+        == "0000001 01100 01011 011 01010 0110011"
+    )
+
+
+def test_binary_encode_rv32i_line_div():
+    assert (
+        binary_encode_rv32i_line("div x13, x14, x15", readable=True)
+        == "0000001 01111 01110 100 01101 0110011"
+    )
+
+
+def test_binary_encode_rv32i_line_divu():
+    assert (
+        binary_encode_rv32i_line("divu x16, x17, x18", readable=True)
+        == "0000001 10010 10001 101 10000 0110011"
+    )
+
+
+def test_binary_encode_rv32i_line_rem():
+    assert (
+        binary_encode_rv32i_line("rem x19, x20, x21", readable=True)
+        == "0000001 10101 10100 110 10011 0110011"
+    )
+
+
+def test_binary_encode_rv32i_line_remu():
+    assert (
+        binary_encode_rv32i_line("remu x22, x23, x24", readable=True)
+        == "0000001 11000 10111 111 10110 0110011"
+    )
+
+
 def test_int_to_binary():
     assert int_to_binary(1) == "000000000001"
