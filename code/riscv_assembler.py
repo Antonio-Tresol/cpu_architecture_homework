@@ -1,11 +1,10 @@
 from typing import List
 import re
 from rv32i_maps import (
-    RV32I_FUNCT3,
+    RV32I_FUNCT3_MAP,
     RV32I_INSTRUCTION_INFO_MAP,
-    RV32I_FUNCT7,
-    ABI_TO_REGISTER_MAP,
-    INT_REGISTER_TO_BINARY_MAP,
+    RV32I_FUNCT7_MAP,
+    ABI_INT_REGISTER_TO_BINARY_MAP,
 )
 
 
@@ -51,6 +50,8 @@ def binary_encode_rv32i_line(instruction: str, readable: bool = False) -> str:
         encoding = binary_encode_rv32i_u_format(parts=parts)
     elif format == "B":
         encoding = binary_encode_rv32i_b_format(parts=parts)
+    elif format == "J":
+        encoding = binary_encode_rv32i_j_format(parts=parts)
     if not readable:
         encoding = encoding.replace(" ", "")
     return encoding
@@ -76,12 +77,38 @@ def binary_encode_rv32i_b_format(parts: List[str]) -> str:
     imm = parts[3]
 
     opcode = RV32I_INSTRUCTION_INFO_MAP.get(instruction)["opcode"]
-    rs1_encoding = INT_REGISTER_TO_BINARY_MAP.get(rs1)
-    rs2_encoding = INT_REGISTER_TO_BINARY_MAP.get(rs2)
-    funct3 = RV32I_FUNCT3.get(instruction)
+    rs1_encoding = ABI_INT_REGISTER_TO_BINARY_MAP.get(rs1)
+    rs2_encoding = ABI_INT_REGISTER_TO_BINARY_MAP.get(rs2)
+    funct3 = RV32I_FUNCT3_MAP.get(instruction)
     imm_encoding = int_to_binary(imm, 13)  # 0 0 000000 00011
 
-    return f"{imm_encoding[0]}{imm_encoding[2:8]} {rs2_encoding} {rs1_encoding} {funct3} {imm_encoding[8:12]}{imm_encoding[1]} {opcode}"
+    return f"{imm_encoding[0]} {imm_encoding[2:8]} {rs2_encoding} {rs1_encoding} {funct3} {imm_encoding[8:12]}{imm_encoding[1]} {opcode}"
+
+
+def binary_encode_rv32i_j_format(parts: List[str]) -> str:
+    """Encodes a J-format (jump) RISC-V instruction.
+
+    Parameters
+    ----------
+    parts : List[str]
+        The instruction parts, split by spaces and stripped of commas.
+
+    Returns
+    -------
+    str
+        The 32-bit binary representation of the J-format instruction.
+
+    """
+    instruction = parts[0]
+    rd = parts[1]
+    imm = parts[2]
+
+    opcode = RV32I_INSTRUCTION_INFO_MAP.get(instruction)["opcode"]
+    rd_encoding = ABI_INT_REGISTER_TO_BINARY_MAP.get(rd)
+    # imm_encoding = int_to_binary(imm, 21)  # imm[20|10:1|11|19:12]
+    imm_encoding = int_to_binary(imm, 21)
+    print(imm_encoding)
+    return f"{imm_encoding[0]} {imm_encoding[10:20]} {imm_encoding[9]} {imm_encoding[1:9]} {rd_encoding} {opcode}"
 
 
 def binary_encode_rv32i_u_format(parts: List[str]) -> str:
@@ -91,7 +118,7 @@ def binary_encode_rv32i_u_format(parts: List[str]) -> str:
     imm = parts[2]
 
     opcode = RV32I_INSTRUCTION_INFO_MAP.get(instruction)["opcode"]
-    rd_encoding = INT_REGISTER_TO_BINARY_MAP.get(rd)
+    rd_encoding = ABI_INT_REGISTER_TO_BINARY_MAP.get(rd)
     imm_encoding = int_to_binary(imm, 20)
 
     return f"{imm_encoding} {rd_encoding} {opcode}"
@@ -118,12 +145,12 @@ def binary_encode_rv32i_r_format(parts: List[str]) -> str:
     rs2 = parts[3]
 
     opcode = RV32I_INSTRUCTION_INFO_MAP.get(instruction)["opcode"]
-    rd_encoding = INT_REGISTER_TO_BINARY_MAP.get(rd)
-    rs1_encoding = INT_REGISTER_TO_BINARY_MAP.get(rs1)
-    rs2_encoding = INT_REGISTER_TO_BINARY_MAP.get(rs2)
+    rd_encoding = ABI_INT_REGISTER_TO_BINARY_MAP.get(rd)
+    rs1_encoding = ABI_INT_REGISTER_TO_BINARY_MAP.get(rs1)
+    rs2_encoding = ABI_INT_REGISTER_TO_BINARY_MAP.get(rs2)
 
-    funct3 = RV32I_FUNCT3.get(instruction)
-    funct7 = RV32I_FUNCT7.get(instruction)
+    funct3 = RV32I_FUNCT3_MAP.get(instruction)
+    funct7 = RV32I_FUNCT7_MAP.get(instruction)
 
     return f"{funct7} {rs2_encoding} {rs1_encoding} {funct3} {rd_encoding} {opcode}"
 
@@ -148,9 +175,9 @@ def binary_encode_rv32i_s_format(parts: List[str]) -> str:
     imm = get_immediate_from_offset(parts)
 
     opcode = RV32I_INSTRUCTION_INFO_MAP.get(instruction)["opcode"]
-    rs2_encoding = INT_REGISTER_TO_BINARY_MAP.get(rs2)
-    rs1_encoding = INT_REGISTER_TO_BINARY_MAP.get(rs1)
-    funct3 = RV32I_FUNCT3.get(instruction)
+    rs2_encoding = ABI_INT_REGISTER_TO_BINARY_MAP.get(rs2)
+    rs1_encoding = ABI_INT_REGISTER_TO_BINARY_MAP.get(rs1)
+    funct3 = RV32I_FUNCT3_MAP.get(instruction)
     imm_encoding = int_to_binary(imm)
 
     print(imm_encoding)
@@ -173,19 +200,19 @@ def binary_encode_rv32i_i_format(parts: List[str]) -> str:
     """
 
     instruction = parts[0]
-    rd = ABI_TO_REGISTER_MAP.get(parts[1])
+    rd = parts[1]
     rs1 = 0
     imm = 0
     if is_i_format_with_offset(parts):
         rs1 = get_rs1_from_offset(parts)
         imm = get_immediate_from_offset(parts)
     else:
-        rs1 = ABI_TO_REGISTER_MAP.get(parts[2])
+        rs1 = parts[2]
         imm = parts[3]
     instruction_encoding = RV32I_INSTRUCTION_INFO_MAP.get(instruction)["opcode"]
-    rd_encoding = INT_REGISTER_TO_BINARY_MAP.get(rd)
-    rs1_encoding = INT_REGISTER_TO_BINARY_MAP.get(rs1)
-    funct3_encoding = RV32I_FUNCT3.get(instruction)
+    rd_encoding = ABI_INT_REGISTER_TO_BINARY_MAP.get(rd)
+    rs1_encoding = ABI_INT_REGISTER_TO_BINARY_MAP.get(rs1)
+    funct3_encoding = RV32I_FUNCT3_MAP.get(instruction)
     imm_encoding = int_to_binary(imm)
     i_instructions_encoding = f"{imm_encoding} {rs1_encoding} {funct3_encoding} {rd_encoding} {instruction_encoding}"
     return i_instructions_encoding

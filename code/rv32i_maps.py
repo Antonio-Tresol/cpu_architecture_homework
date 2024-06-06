@@ -1,207 +1,247 @@
 RV32I_INSTRUCTION_INFO_MAP = {
-    "lui": {
+    "lui": {  # check
         "format": "U",
         "opcode": "0110111",
     },
-    "auipc": {
+    "auipc": {  # check
         "format": "U",
         "opcode": "0010111",
     },
-    "jal": {
+    "jal": {  # check
         "format": "J",
         "opcode": "1101111",
     },
-    "jalr": {
+    "jalr": {  # check
         "format": "I",
         "opcode": "1100111",
     },
-    "beq": {
+    "beq": {  # check
         "format": "B",
         "opcode": "1100011",
     },
-    "bne": {
+    "bne": {  # check
         "format": "B",
         "opcode": "1100011",
     },
-    "blt": {
+    "blt": {  # check
         "format": "B",
         "opcode": "1100011",
     },
-    "bge": {
+    "bge": {  # check
         "format": "B",
         "opcode": "1100011",
     },
-    "bltu": {
+    "bltu": {  # check
         "format": "B",
         "opcode": "1100011",
     },
-    "bgeu": {
+    "bgeu": {  # check
         "format": "B",
         "opcode": "1100011",
     },
-    "lb": {
+    "lb": {  # check
         "format": "I",
         "opcode": "0000011",
     },
-    "lh": {
+    "lh": {  # check
         "format": "I",
         "opcode": "0000011",
     },
-    "lw": {
+    "lw": {  # check
         "format": "I",
         "opcode": "0000011",
     },
-    "lbu": {
+    "lbu": {  # check
         "format": "I",
         "opcode": "0000011",
     },
-    "lhu": {
+    "lhu": {  # check
         "format": "I",
         "opcode": "0000011",
     },
-    "sb": {
+    "sb": {  # check
         "format": "S",
         "opcode": "0100011",
     },
-    "sh": {
+    "sh": {  # check
         "format": "S",
         "opcode": "0100011",
     },
-    "sw": {
+    "sw": {  # check
         "format": "S",
         "opcode": "0100011",
     },
-    "addi": {
+    "addi": {  # check
         "format": "I",
         "opcode": "0010011",
     },
-    "slti": {
+    "slti": {  # check
         "format": "I",
         "opcode": "0010011",
     },
-    "sltiu": {
+    "sltiu": {  # check
         "format": "I",
         "opcode": "0010011",
     },
-    "xori": {
+    "xori": {  # check
         "format": "I",
         "opcode": "0010011",
     },
-    "ori": {
+    "ori": {  # check
         "format": "I",
         "opcode": "0010011",
     },
-    "andi": {
+    "andi": {  # check
         "format": "I",
         "opcode": "0010011",
     },
-    "slli": {
+    "slli": {  # check
         "format": "I",
         "opcode": "0010011",
     },
-    "srli": {
+    "srli": {  # check
         "format": "I",
         "opcode": "0010011",
     },
-    "srai": {
+    "srai": {  # check
         "format": "I",
         "opcode": "0010011",
     },
-    "add": {
+    "add": {  # check
         "format": "R",
         "opcode": "0110011",
     },
-    "sub": {
+    "sub": {  # check
         "format": "R",
         "opcode": "0110011",
     },
-    "sll": {
+    "sll": {  # check
         "format": "R",
         "opcode": "0110011",
     },
-    "slt": {
+    "slt": {  # check
         "format": "R",
         "opcode": "0110011",
     },
-    "sltu": {
+    "sltu": {  # check
         "format": "R",
         "opcode": "0110011",
     },
-    "xor": {
+    "xor": {  # check
         "format": "R",
         "opcode": "0110011",
     },
-    "srl": {
+    "srl": {  # check
         "format": "R",
         "opcode": "0110011",
     },
-    "sra": {
+    "sra": {  # check
         "format": "R",
         "opcode": "0110011",
     },
-    "or": {
+    "or": {  # check
         "format": "R",
         "opcode": "0110011",
     },
-    "and": {
+    "and": {  # check
         "format": "R",
         "opcode": "0110011",
     },
-    "fence": {
+    "fence": {  # check
         "format": "I",
         "opcode": "0001111",
     },
-    "ecall": {
+    "ecall": {  # check
         "format": "I",
         "opcode": "1110011",
     },
-    "ebreak": {
+    "ebreak": {  # check
         "format": "I",
         "opcode": "1110011",
     },
+    "mul": {
+        "format": "R",
+        "opcode": "0110011",
+    },
+    "mulh": {
+        "format": "R",
+        "opcode": "0110011",
+    },
+    "mulhsu": {
+        "format": "R",
+        "opcode": "0110011",
+    },
+    "mulhu": {
+        "format": "R",
+        "opcode": "0110011",
+    },
+    "div": {
+        "format": "R",
+        "opcode": "0110011",
+    },
+    "divu": {
+        "format": "R",
+        "opcode": "0110011",
+    },
+    "rem": {
+        "format": "R",
+        "opcode": "0110011",
+    },
+    "remu": {
+        "format": "R",
+        "opcode": "0110011",
+    },
 }
 
-RV32I_FUNCT3 = {
-    "jalr": "000",
-    "beq": "000",
-    "bne": "001",
-    "blt": "100",
-    "bge": "101",
-    "bltu": "110",
-    "bgeu": "111",
-    "lb": "000",
-    "lh": "001",
-    "lw": "010",
-    "lbu": "100",
-    "lhu": "101",
-    "sb": "000",
-    "sh": "001",
-    "sw": "010",
-    "addi": "000",
-    "slti": "010",
-    "sltiu": "011",
-    "xori": "100",
-    "ori": "110",
-    "andi": "111",
-    "slli": "001",
-    "srli": "101",
-    "srai": "101",
-    "add": "000",
-    "sub": "000",
-    "sll": "001",
-    "slt": "010",
-    "sltu": "011",
-    "xor": "100",
-    "srl": "101",
-    "sra": "101",
-    "or": "110",
-    "and": "111",
-    "fence": "000",
-    "ecall": "000",
-    "ebreak": "000",
+RV32I_FUNCT3_MAP = {
+    "jalr": "000",  # check
+    "beq": "000",  # check
+    "bne": "001",  # check
+    "blt": "100",  # check
+    "bge": "101",  # check
+    "bltu": "110",  # check
+    "bgeu": "111",  # check
+    "lb": "000",  # check
+    "lh": "001",  # check
+    "lw": "010",  # check
+    "lbu": "100",  # check
+    "lhu": "101",  # check
+    "sb": "000",  # check
+    "sh": "001",  # check
+    "sw": "010",  # check
+    "addi": "000",  # check
+    "slti": "010",  # check
+    "sltiu": "011",  # check
+    "xori": "100",  # check
+    "ori": "110",  # check
+    "andi": "111",  # check
+    "slli": "001",  # check
+    "srli": "101",  # check
+    "srai": "101",  # check
+    "add": "000",  # check
+    "sub": "000",  # check
+    "sll": "001",  # check
+    "slt": "010",  # check
+    "sltu": "011",  # check
+    "xor": "100",  # check
+    "srl": "101",  # check
+    "sra": "101",  # check
+    "or": "110",  # check
+    "and": "111",  # check
+    "fence": "000",  # check
+    "ecall": "000",  # check
+    "ebreak": "000",  # check
+    "mul": "000",
+    "mulh": "001",
+    "mulhsu": "010",
+    "mulhu": "011",
+    "div": "100",
+    "divu": "101",
+    "rem": "110",
+    "remu": "111",
 }
 
-RV32I_FUNCT7 = {
+RV32I_FUNCT7_MAP = {  # check
     "slli": "0000000",
     "srli": "0000000",
     "srai": "0100000",
@@ -215,77 +255,51 @@ RV32I_FUNCT7 = {
     "sra": "0100000",
     "or": "0000000",
     "and": "0000000",
+    "mul": "0000001",
+    "mulh": "0000001",
+    "mulhsu": "0000001",
+    "mulhu": "0000001",
+    "div": "0000001",
+    "divu": "0000001",
+    "rem": "0000001",
+    "remu": "0000001",
 }
 
-ABI_TO_REGISTER_MAP = {
-    "zero": "x0",
-    "ra": "x1",
-    "sp": "x2",
-    "gp": "x3",
-    "tp": "x4",
-    "t0": "x5",
-    "t1": "x6",
-    "t2": "x7",
-    "s0": "x8",
-    "fp": "x8",
-    "s1": "x9",
-    "a0": "x10",
-    "a1": "x11",
-    "a2": "x12",
-    "a3": "x13",
-    "a4": "x14",
-    "a5": "x15",
-    "a6": "x16",
-    "a7": "x17",
-    "s2": "x18",
-    "s3": "x19",
-    "s4": "x20",
-    "s5": "x21",
-    "s6": "x22",
-    "s7": "x23",
-    "s8": "x24",
-    "s9": "x25",
-    "s10": "x26",
-    "s11": "x27",
-    "t3": "x28",
-    "t4": "x29",
-    "t5": "x30",
-    "t6": "x31",
+ABI_INT_REGISTER_TO_BINARY_MAP = {
+    "zero": "00000",
+    "ra": "00001",
+    "sp": "00010",
+    "gp": "00011",
+    "tp": "00100",
+    "t0": "00101",
+    "t1": "00110",
+    "t2": "00111",
+    "s0": "01000",
+    "fp": "01000",
+    "s1": "01001",
+    "a0": "01010",
+    "a1": "01011",
+    "a2": "01100",
+    "a3": "01101",
+    "a4": "01110",
+    "a5": "01111",
+    "a6": "10000",
+    "a7": "10001",
+    "s2": "10010",
+    "s3": "10011",
+    "s4": "10100",
+    "s5": "10101",
+    "s6": "10110",
+    "s7": "10111",
+    "s8": "11000",
+    "s9": "11001",
+    "s10": "11010",
+    "s11": "11011",
+    "t3": "11100",
+    "t4": "11101",
+    "t5": "11110",
+    "t6": "11111",
     # Identity mappings
-    "x0": "x0",
-    "x1": "x1",
-    "x2": "x2",
-    "x3": "x3",
-    "x4": "x4",
-    "x5": "x5",
-    "x6": "x6",
-    "x7": "x7",
-    "x8": "x8",
-    "x9": "x9",
-    "x10": "x10",
-    "x11": "x11",
-    "x12": "x12",
-    "x13": "x13",
-    "x14": "x14",
-    "x15": "x15",
-    "x16": "x16",
-    "x17": "x17",
-    "x18": "x18",
-    "x19": "x19",
-    "x20": "x20",
-    "x21": "x21",
-    "x22": "x22",
-    "x23": "x23",
-    "x24": "x24",
-    "x25": "x25",
-    "x26": "x26",
-    "x27": "x27",
-    "x28": "x28",
-    "x29": "x29",
-    "x30": "x30",
-    "x31": "x31",
-}
-INT_REGISTER_TO_BINARY_MAP = {
     "x0": "00000",
     "x1": "00001",
     "x2": "00010",
