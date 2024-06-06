@@ -146,35 +146,35 @@ def test_binary_encode_rv32i_line_bgeu():
 def test_binary_encode_rv32i_line_lb():
     assert (
         binary_encode_rv32i_line("lb x1, -1(x2)", readable=True)
-        == "11111111111111 00010 000 00001 0000011"
+        == "111111111111 00010 000 00001 0000011"
     )
 
 
 def test_binary_encode_rv32i_line_lh():
     assert (
         binary_encode_rv32i_line("lh x1, -1(x3)", readable=True)
-        == "11111111111111 00011 001 00001 0000011"
+        == "111111111111 00011 001 00001 0000011"
     )
 
 
 def test_binary_encode_rv32i_line_lw():
     assert (
         binary_encode_rv32i_line("lw x1, 10(fp)", readable=True)
-        == "00000000001010 01000 010 00001 0000011"
+        == "000000001010 01000 010 00001 0000011"
     )
 
 
 def test_binary_encode_rv32i_line_lbu():
     assert (
         binary_encode_rv32i_line("lbu x1, 0(x2)", readable=True)
-        == "00000000000000 00010 100 00001 0000011"
+        == "000000000000 00010 100 00001 0000011"
     )
 
 
 def test_binary_encode_rv32i_line_lhu():
     assert (
         binary_encode_rv32i_line("lhu x1, 0(x2)", readable=True)
-        == "00000000000000 00010 101 00001 0000011"
+        == "000000000000 00010 101 00001 0000011"
     )
 
 
@@ -202,56 +202,56 @@ def test_binary_encode_rv32i_line_sw():
 def test_binary_encode_rv32i_line_slti():
     assert (
         binary_encode_rv32i_line("slti x1, x2, 1", readable=True)
-        == "0000000 00010 010 00001 0010011"
+        == "000000000001 00010 010 00001 0010011"
     )
 
 
 def test_binary_encode_rv32i_line_sltiu():
     assert (
-        binary_encode_rv32i_line("sltiu x1, x2, 1", readable=True)
-        == "0000000 00010 011 00001 0010011"
+        binary_encode_rv32i_line("sltiu x1, x2, 2", readable=True)
+        == "000000000010 00010 011 00001 0010011"
     )
 
 
 def test_binary_encode_rv32i_line_xori():
     assert (
-        binary_encode_rv32i_line("xori x1, x2, 1", readable=True)
-        == "0000000 00010 100 00001 0010011"
+        binary_encode_rv32i_line("xori x1, x2, -1", readable=True)
+        == "111111111111 00010 100 00001 0010011"
     )
 
 
 def test_binary_encode_rv32i_line_ori():
     assert (
-        binary_encode_rv32i_line("ori x1, x2, 1", readable=True)
-        == "0000000 00010 110 00001 0010011"
+        binary_encode_rv32i_line("ori x1, x2, 7", readable=True)
+        == "000000000111 00010 110 00001 0010011"
     )
 
 
 def test_binary_encode_rv32i_line_andi():
     assert (
         binary_encode_rv32i_line("andi x1, x2, 1", readable=True)
-        == "0000000 00010 111 00001 0010011"
+        == "000000000001 00010 111 00001 0010011"
     )
 
 
 def test_binary_encode_rv32i_line_slli():
     assert (
         binary_encode_rv32i_line("slli x1, x2, 1", readable=True)
-        == "0000000 00010 001 00001 0010011"
+        == "000000000001 00010 001 00001 0010011"
     )
 
 
 def test_binary_encode_rv32i_line_srli():
     assert (
         binary_encode_rv32i_line("srli x1, x2, 1", readable=True)
-        == "0000000 00010 101 00001 0010011"
+        == "000000000001 00010 101 00001 0010011"
     )
 
 
 def test_binary_encode_rv32i_line_srai():
     assert (
-        binary_encode_rv32i_line("srai x1, x2, 1", readable=True)
-        == "0000001 00010 101 00001 0010011"
+        binary_encode_rv32i_line("srai x1, x2, -1", readable=True)
+        == "111111111111 00010 101 00001 0010011"
     )
 
 
