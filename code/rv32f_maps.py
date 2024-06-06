@@ -1,6 +1,6 @@
 RV32F_INSTRUCTION_INFO_MAP = {
     "flw": {
-        "format": "I",
+        "format": "L",
         "opcode": "0000111",
     },
     "fsw": {
@@ -8,19 +8,19 @@ RV32F_INSTRUCTION_INFO_MAP = {
         "opcode": "0100111",
     },
     "fmadd.s": {
-        "format": "R4",
+        "format": "FMA",
         "opcode": "1000011",
     },
     "fmsub.s": {
-        "format": "R4",
+        "format": "FMA",
         "opcode": "1000111",
     },
     "fnmadd.s": {
-        "format": "R4",
+        "format": "FMA",
         "opcode": "1001011",
     },
     "fnmsub.s": {
-        "format": "R4",
+        "format": "FMA",
         "opcode": "1001111",
     },
     "fadd.s": {
@@ -44,15 +44,15 @@ RV32F_INSTRUCTION_INFO_MAP = {
         "opcode": "1000011",
     },
     "fsgnj.s": {
-        "format": "R",
+        "format": "N",
         "opcode": "1000011",
     },
     "fsgnjn.s": {
-        "format": "R",
+        "format": "N",
         "opcode": "1000011",
     },
     "fsgnjx.s": {
-        "format": "R",
+        "format": "N",
         "opcode": "1000011",
     },
     "fmin.s": {
@@ -64,43 +64,43 @@ RV32F_INSTRUCTION_INFO_MAP = {
         "opcode": "1000011",
     },
     "fcvt.s.w": {
-        "format": "R",
+        "format": "FC",
         "opcode": "1010011",
     },
     "fcvt.s.wu": {
-        "format": "R",
+        "format": "FC",
         "opcode": "1010011",
     },
     "fcvt.w.s": {
-        "format": "R",
+        "format": "FC",
         "opcode": "1010011",
     },
     "fcvt.wu.s": {
-        "format": "R",
+        "format": "FC",
         "opcode": "1010011",
     },
     "fmv.x.w": {
-        "format": "R",
+        "format": "FM",
         "opcode": "1010011",
     },
     "fmv.w.x": {
-        "format": "R",
+        "format": "FM",
         "opcode": "1010011",
     },
     "feq.s": {
-        "format": "R",
+        "format": "C",
         "opcode": "1010011",
     },
     "flt.s": {
-        "format": "R",
+        "format": "C",
         "opcode": "1010011",
     },
     "fle.s": {
-        "format": "R",
+        "format": "C",
         "opcode": "1010011",
     },
     "fclass.s": {
-        "format": "R",
+        "format": "FCL",
         "opcode": "1010011",
     },
 }
@@ -226,4 +226,12 @@ ABI_FLOAT_REGISTER_TO_BINARY_MAP = {
     "ft9": "11101",
     "ft10": "11110",
     "ft11": "11111",
+}
+
+ROUNDING_MODE_MAP = {
+    "rne": "000",  # Round to Nearest, ties to Even
+    "rtz": "001",  # Round Toward Zero
+    "rdn": "010",  # Round Down (Toward Negative Infinity)
+    "rup": "011",  # Round Up (Toward Positive Infinity)
+    "rmm": "100",  # Round to Nearest, ties to Max Magnitude
 }
