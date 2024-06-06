@@ -1,5 +1,5 @@
 import pytest
-from riscv_assembler import *
+from riscv32_im_assembler import *
 
 
 def test_binary_encode_rv32i_line_addi():
