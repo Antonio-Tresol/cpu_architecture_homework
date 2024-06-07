@@ -11,3 +11,4 @@ code/__pycache__/rv32f_maps.cpython-312.pyc
 code/__pycache__/riscv32_im_assembler.cpython-312-pytest-8.2.2.pyc
 code/__pycache__/riscv32_im_maps.cpython-312.pyc
 code/__pycache__/riscv32_im_test.cpython-312-pytest-8.2.2.pyc
+code/.vscode/launch.json

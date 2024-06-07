@@ -4,7 +4,7 @@ import hex_to_bin as binhex
 
 
 def raw_assemble_riscv32im(
-    file_to_assemble: str, output_file: str, format: str = "bin"
+    file_to_assemble: str, output_file: str, format: str, padding_lines: int = 0
 ) -> None:
     """
     Assemble a file of RISC-V 32 Interger-Multiply assembly instructions into a file of hexadecimal or binary machine code.
@@ -21,24 +21,21 @@ def raw_assemble_riscv32im(
       The name of the file to write the hexadecimal machine code to.
     format: str
       binary `bin` or hexadecimal `hex`. Default value is `bin`
+    padding_lines: int
+      a number of padding lines to add
     Returns
     -------
     None
     """
-    try:
-        with open(file_to_assemble, mode="r") as asm_file, open(
-            output_file, mode="w"
-        ) as out_file:
-            pad_with_zeros(out_file, 2, format)
-            for asm_line in asm_file:
-                encoding = assembler.binary_encode_rv32i_line(asm_line)
-                if format == "hex":
-                    encoding = binhex.bin_line_to_hex(bin_line=encoding)
-                out_file.write(encoding + "\n")
-    except SystemExit:
-        print("Cancelling Assembling process, exiting.")
-    except Exception as e:
-        print(f"error in 'raw_assemble_risc32vim_to_hex' -> description: {e}")
+    with open(file_to_assemble, mode="r") as asm_file, open(
+        output_file, mode="w"
+    ) as out_file:
+        pad_with_zeros(out_file, padding_lines, format)
+        for asm_line in asm_file:
+            encoding = assembler.binary_encode_rv32i_line(asm_line)
+            if format == "hex":
+                encoding = binhex.bin_line_to_hex(bin_line=encoding)
+            out_file.write(encoding + "\n")
 
 
 def pad_with_zeros(out_file: io.TextIOWrapper, n_lines: int, format: str) -> None:
@@ -74,7 +71,9 @@ def main() -> None:
     output_filename_hex: str = "output_hex"
     output_filename_bin: str = "output_bin"
 
-    raw_assemble_riscv32im(file_to_assemble=filename, output_file=output_filename_bin)
+    raw_assemble_riscv32im(
+        file_to_assemble=filename, output_file=output_filename_bin, format="bin"
+    )
 
     raw_assemble_riscv32im(
         file_to_assemble=filename, output_file=output_filename_hex, format="hex"

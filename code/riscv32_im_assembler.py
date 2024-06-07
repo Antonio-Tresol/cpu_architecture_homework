@@ -3,7 +3,9 @@ import re
 import riscv32_im_maps as rv32_im_maps
 
 
-def binary_encode_rv32i_line(instruction: str, readable: bool = False) -> str:
+def binary_encode_rv32i_line(
+    instruction: str, readable: bool = False, verbose: bool = False
+) -> str:
     """Encodes a given RISC-V interger E instruction into its 32-bit binary representation.
 
     This function takes a single RISC-V 32-bit instruction in assembly format
@@ -31,7 +33,7 @@ def binary_encode_rv32i_line(instruction: str, readable: bool = False) -> str:
     >>> binary_encode_rv32i_line("sw x11, 4(x10)")
     '00000000010110101000010100100011'
     """
-    parts = [part.rstrip(",").lower() for part in instruction.split(" ")]
+    parts = [part.rstrip(",").rstrip("\n").lower() for part in instruction.split(" ")]
     opcode = parts[0]
     format = rv32_im_maps.INSTRUCTION_INFO_MAP.get(opcode)["format"]
     encoding = ""
@@ -49,6 +51,8 @@ def binary_encode_rv32i_line(instruction: str, readable: bool = False) -> str:
         encoding = binary_encode_rv32i_j_format(parts=parts)
     if not readable:
         encoding = encoding.replace(" ", "")
+    if verbose:
+        print(f"final encoding for {parts}: {encoding}")
     return encoding
 
 
@@ -71,13 +75,21 @@ def binary_encode_rv32i_b_format(parts: List[str]) -> str:
     rs2 = parts[2]
     imm = parts[3]
 
+    print(parts)
+
     opcode = rv32_im_maps.INSTRUCTION_INFO_MAP.get(instruction)["opcode"]
     rs1_encoding = rv32_im_maps.ABI_INT_REGISTER_TO_BINARY_MAP.get(rs1)
     rs2_encoding = rv32_im_maps.ABI_INT_REGISTER_TO_BINARY_MAP.get(rs2)
     funct3 = rv32_im_maps.FUNCT_3_MAP.get(instruction)
     imm_encoding = int_to_binary(imm, 13)  # 0 0 000000 00011
-
-    return f"{imm_encoding[0]} {imm_encoding[2:8]} {rs2_encoding} {rs1_encoding} {funct3} {imm_encoding[8:12]}{imm_encoding[1]} {opcode}"
+    print("imm encoding ", imm_encoding)
+    print("opcode ", opcode)
+    print("rs1 ", rs1_encoding)
+    print("rs2 encoding ", rs2_encoding)
+    print("funct3 ", funct3)
+    result = f"{imm_encoding[0]} {imm_encoding[2:8]} {rs2_encoding} {rs1_encoding} {funct3} {imm_encoding[8:12]}{imm_encoding[1]} {opcode}"
+    print("result ", result)
+    return result
 
 
 def binary_encode_rv32i_j_format(parts: List[str]) -> str:
