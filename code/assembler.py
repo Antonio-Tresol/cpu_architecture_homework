@@ -1,10 +1,6 @@
 import riscv32_im_assembler as assembler
 import hex_to_bin as binhex
 
-filename: str = "basic_program.s"
-output_filename_hex: str = "output_hex"
-output_filename_bin: str = "output_bin"
-
 
 def raw_assemble_riscv32im(
     file_to_assemble: str, output_file: str, format: str = "bin"
@@ -41,8 +37,18 @@ def raw_assemble_riscv32im(
         print(f"error in 'raw_assemble_risc32vim_to_hex' -> description: {e}")
 
 
-raw_assemble_riscv32im(file_to_assemble=filename, output_file=output_filename_bin)
+def main() -> None:
 
-raw_assemble_riscv32im(
-    file_to_assemble=filename, output_file=output_filename_hex, format="hex"
-)
+    filename: str = "basic_program.s"
+    output_filename_hex: str = "output_hex"
+    output_filename_bin: str = "output_bin"
+
+    raw_assemble_riscv32im(file_to_assemble=filename, output_file=output_filename_bin)
+
+    raw_assemble_riscv32im(
+        file_to_assemble=filename, output_file=output_filename_hex, format="hex"
+    )
+
+
+if __name__ == "__main__":
+    main()
