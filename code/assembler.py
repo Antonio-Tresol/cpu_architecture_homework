@@ -1,3 +1,4 @@
+import io
 import riscv32_im_assembler as assembler
 import hex_to_bin as binhex
 
@@ -28,6 +29,7 @@ def raw_assemble_riscv32im(
         with open(file_to_assemble, mode="r") as asm_file, open(
             output_file, mode="w"
         ) as out_file:
+            pad_with_zeros(out_file, 2, format)
             for asm_line in asm_file:
                 encoding = assembler.binary_encode_rv32i_line(asm_line)
                 if format == "hex":
@@ -37,6 +39,33 @@ def raw_assemble_riscv32im(
         print("Cancelling Assembling process, exiting.")
     except Exception as e:
         print(f"error in 'raw_assemble_risc32vim_to_hex' -> description: {e}")
+
+
+def pad_with_zeros(out_file: io.TextIOWrapper, n_lines: int, format: str) -> None:
+    """
+    Writes padding lines to the output file.
+
+    This function writes a specified number of lines to the output file. Each line is a string of zeros. The length of the string depends on the specified format.
+
+    Parameters
+    ----------
+    out_file : io.TextIOWrapper
+        The output file to which the padding lines are written.
+    n_lines : int
+        The number of padding lines to write.
+    format : str
+        The format of the padding. If 'hex', each line will contain 8 zeros. Otherwise, each line will contain 32 zeros.
+
+    Returns
+    -------
+    None
+
+    """
+    padding: str = (
+        "00000000\n" if format == "hex" else "00000000000000000000000000000000\n"
+    )
+    for _ in range(n_lines):
+        out_file.write(padding)
 
 
 def main() -> None:
