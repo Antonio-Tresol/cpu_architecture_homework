@@ -4,7 +4,7 @@ import riscv32_im_maps as rv32_im_maps
 
 
 def binary_encode_rv32i_line(
-    instruction: str, readable: bool = False, verbose: bool = False
+    instruction: str, readable: bool = False, verbose: bool = True
 ) -> str:
     """Encodes a given RISC-V interger E instruction into its 32-bit binary representation.
 
