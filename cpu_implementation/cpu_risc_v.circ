@@ -170,7 +170,51 @@
       <a name="label" val="Write_F"/>
       <a name="labelfont" val="SansSerif bold 6"/>
     </comp>
+    <comp lib="0" loc="(240,1030)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="output" val="true"/>
+      <a name="radix" val="16"/>
+      <a name="width" val="32"/>
+    </comp>
     <comp lib="0" loc="(240,770)" name="Clock"/>
+    <comp lib="0" loc="(260,1090)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(290,1080)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="IR"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(460,1040)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="output" val="true"/>
+      <a name="radix" val="16"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(480,1100)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(530,930)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="ENABLE_WRITE"/>
+    </comp>
+    <comp lib="0" loc="(550,1100)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="AFTER_IFID"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(560,380)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="IR"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(580,330)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="AFTER_IFID"/>
+      <a name="width" val="32"/>
+    </comp>
     <comp lib="2" loc="(1160,550)" name="Multiplexer">
       <a name="width" val="32"/>
     </comp>
@@ -196,26 +240,19 @@
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="width" val="24"/>
     </comp>
-    <comp lib="4" loc="(300,360)" name="ROM">
+    <comp lib="4" loc="(300,350)" name="RAM">
       <a name="addrWidth" val="24"/>
       <a name="appearance" val="classic"/>
-      <a name="contents">addr/data: 24 32
-fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
-89 0 110098 890 980 7*0 89
-</a>
       <a name="dataWidth" val="32"/>
     </comp>
-    <comp lib="8" loc="(1540,219)" name="Text">
+    <comp lib="8" loc="(1540,215)" name="Text">
       <a name="text" val="StoreFlag"/>
     </comp>
     <comp lib="8" loc="(1615,850)" name="Text">
       <a name="text" val="JUMP/BRANCH"/>
     </comp>
-    <comp lib="8" loc="(1988,793)" name="Text">
+    <comp lib="8" loc="(1985,790)" name="Text">
       <a name="text" val="Enable register Writting"/>
-    </comp>
-    <comp lib="8" loc="(677,335)" name="Text">
-      <a name="text" val="I think it won't need the Unit code"/>
     </comp>
     <comp loc="(1070,300)" name="vector_register_file">
       <a name="labelfont" val="SansSerif bold 10"/>
@@ -268,6 +305,8 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
     <wire from="(1120,630)" to="(1170,630)"/>
     <wire from="(1140,570)" to="(1140,610)"/>
     <wire from="(1160,550)" to="(1170,550)"/>
+    <wire from="(1180,760)" to="(1180,860)"/>
+    <wire from="(1180,860)" to="(1460,860)"/>
     <wire from="(1190,760)" to="(1190,770)"/>
     <wire from="(1190,770)" to="(1470,770)"/>
     <wire from="(1210,230)" to="(1450,230)"/>
@@ -318,6 +357,8 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
     <wire from="(1400,280)" to="(1450,280)"/>
     <wire from="(1400,290)" to="(1450,290)"/>
     <wire from="(1400,300)" to="(1450,300)"/>
+    <wire from="(1460,760)" to="(1460,860)"/>
+    <wire from="(1460,860)" to="(1840,860)"/>
     <wire from="(1470,760)" to="(1470,770)"/>
     <wire from="(1470,770)" to="(1850,770)"/>
     <wire from="(1490,230)" to="(1570,230)"/>
@@ -340,6 +381,7 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
     <wire from="(1660,690)" to="(1660,780)"/>
     <wire from="(1680,800)" to="(1690,800)"/>
     <wire from="(1690,800)" to="(1690,830)"/>
+    <wire from="(1840,760)" to="(1840,860)"/>
     <wire from="(1850,760)" to="(1850,770)"/>
     <wire from="(1870,280)" to="(1940,280)"/>
     <wire from="(1870,290)" to="(1950,290)"/>
@@ -367,18 +409,43 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
     <wire from="(210,370)" to="(210,830)"/>
     <wire from="(210,370)" to="(240,370)"/>
     <wire from="(210,830)" to="(1690,830)"/>
+    <wire from="(240,1030)" to="(270,1030)"/>
     <wire from="(240,770)" to="(250,770)"/>
-    <wire from="(250,390)" to="(250,770)"/>
+    <wire from="(250,390)" to="(250,420)"/>
+    <wire from="(250,420)" to="(250,770)"/>
+    <wire from="(250,420)" to="(300,420)"/>
     <wire from="(250,770)" to="(590,770)"/>
+    <wire from="(260,1090)" to="(270,1090)"/>
+    <wire from="(270,1030)" to="(270,1090)"/>
+    <wire from="(270,1030)" to="(290,1030)"/>
     <wire from="(270,370)" to="(280,370)"/>
     <wire from="(280,370)" to="(280,730)"/>
-    <wire from="(280,370)" to="(300,370)"/>
+    <wire from="(280,370)" to="(290,370)"/>
     <wire from="(280,730)" to="(570,730)"/>
-    <wire from="(540,420)" to="(570,420)"/>
+    <wire from="(290,1030)" to="(290,1080)"/>
+    <wire from="(290,360)" to="(290,370)"/>
+    <wire from="(290,360)" to="(300,360)"/>
+    <wire from="(460,1040)" to="(480,1040)"/>
+    <wire from="(480,1040)" to="(480,1100)"/>
+    <wire from="(480,1040)" to="(550,1040)"/>
+    <wire from="(530,930)" to="(580,930)"/>
+    <wire from="(540,440)" to="(550,440)"/>
+    <wire from="(550,1040)" to="(550,1100)"/>
+    <wire from="(550,420)" to="(550,440)"/>
+    <wire from="(550,420)" to="(560,420)"/>
+    <wire from="(560,380)" to="(560,420)"/>
+    <wire from="(560,420)" to="(570,420)"/>
+    <wire from="(580,330)" to="(580,340)"/>
+    <wire from="(580,340)" to="(620,340)"/>
+    <wire from="(580,760)" to="(580,860)"/>
+    <wire from="(580,860)" to="(1180,860)"/>
+    <wire from="(580,860)" to="(580,930)"/>
     <wire from="(590,760)" to="(590,770)"/>
     <wire from="(590,770)" to="(920,770)"/>
-    <wire from="(610,420)" to="(640,420)"/>
+    <wire from="(610,420)" to="(620,420)"/>
     <wire from="(610,730)" to="(1170,730)"/>
+    <wire from="(620,340)" to="(620,420)"/>
+    <wire from="(620,420)" to="(640,420)"/>
     <wire from="(660,230)" to="(1170,230)"/>
     <wire from="(660,230)" to="(660,360)"/>
     <wire from="(660,490)" to="(660,750)"/>
@@ -430,12 +497,17 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
       <rect fill="#db9656" height="360" rx="10" ry="10" stroke="#000000" stroke-width="2" width="40" x="200" y="60"/>
       <text dominant-baseline="central" font-family="SansSerif" font-size="12" font-weight="bold" text-anchor="middle" x="220" y="214">IF/ID</text>
       <circ-anchor facing="east" x="240" y="230"/>
+      <circ-port dir="in" pin="650,1140" x="210" y="420"/>
       <circ-port dir="in" pin="830,1100" x="200" y="80"/>
       <circ-port dir="in" pin="850,1160" x="200" y="390"/>
       <circ-port dir="in" pin="870,1230" x="220" y="420"/>
       <circ-port dir="out" pin="940,1100" x="240" y="80"/>
       <circ-port dir="out" pin="960,1160" x="240" y="390"/>
     </appear>
+    <comp lib="0" loc="(650,1140)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="ENABLE_WRITE"/>
+    </comp>
     <comp lib="0" loc="(830,1100)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="label" val="INSTRUCTION"/>
@@ -476,9 +548,17 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
       <a name="appearance" val="classic"/>
       <a name="width" val="24"/>
     </comp>
+    <wire from="(650,1140)" to="(730,1140)"/>
+    <wire from="(730,1140)" to="(730,1180)"/>
+    <wire from="(730,1140)" to="(840,1140)"/>
+    <wire from="(730,1180)" to="(890,1180)"/>
     <wire from="(830,1100)" to="(890,1100)"/>
+    <wire from="(840,1110)" to="(840,1140)"/>
+    <wire from="(840,1110)" to="(890,1110)"/>
     <wire from="(850,1160)" to="(910,1160)"/>
     <wire from="(870,1230)" to="(900,1230)"/>
+    <wire from="(890,1170)" to="(890,1180)"/>
+    <wire from="(890,1170)" to="(910,1170)"/>
     <wire from="(900,1120)" to="(900,1190)"/>
     <wire from="(900,1190)" to="(900,1230)"/>
     <wire from="(900,1190)" to="(920,1190)"/>
@@ -495,6 +575,7 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
       <rect fill="#db9656" height="550" rx="10" ry="10" stroke="#000000" stroke-width="2" width="40" x="110" y="20"/>
       <text dominant-baseline="central" font-family="SansSerif" font-size="12" font-weight="bold" text-anchor="middle" x="130" y="259">ID/EX</text>
       <circ-anchor facing="east" x="150" y="260"/>
+      <circ-port dir="in" pin="530,230" x="120" y="570"/>
       <circ-port dir="in" pin="850,1050" x="110" y="480"/>
       <circ-port dir="in" pin="850,1110" x="110" y="560"/>
       <circ-port dir="in" pin="850,1180" x="110" y="540"/>
@@ -531,6 +612,10 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
       <circ-port dir="out" pin="960,930" x="150" y="360"/>
       <circ-port dir="out" pin="960,990" x="150" y="440"/>
     </appear>
+    <comp lib="0" loc="(530,230)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="ENABLE_WRITE"/>
+    </comp>
     <comp lib="0" loc="(850,1050)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="label" val="OPCODE"/>
@@ -836,6 +921,7 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
       <a name="appearance" val="classic"/>
       <a name="width" val="32"/>
     </comp>
+    <wire from="(530,230)" to="(880,230)"/>
     <wire from="(850,1050)" to="(910,1050)"/>
     <wire from="(850,1110)" to="(910,1110)"/>
     <wire from="(850,1180)" to="(910,1180)"/>
@@ -854,6 +940,39 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
     <wire from="(850,930)" to="(910,930)"/>
     <wire from="(850,990)" to="(910,990)"/>
     <wire from="(870,1250)" to="(900,1250)"/>
+    <wire from="(880,1000)" to="(880,1060)"/>
+    <wire from="(880,1000)" to="(910,1000)"/>
+    <wire from="(880,1060)" to="(880,1120)"/>
+    <wire from="(880,1060)" to="(910,1060)"/>
+    <wire from="(880,1120)" to="(880,1190)"/>
+    <wire from="(880,1120)" to="(910,1120)"/>
+    <wire from="(880,1190)" to="(910,1190)"/>
+    <wire from="(880,230)" to="(880,280)"/>
+    <wire from="(880,230)" to="(890,230)"/>
+    <wire from="(880,280)" to="(880,340)"/>
+    <wire from="(880,280)" to="(910,280)"/>
+    <wire from="(880,340)" to="(880,400)"/>
+    <wire from="(880,340)" to="(910,340)"/>
+    <wire from="(880,400)" to="(880,460)"/>
+    <wire from="(880,400)" to="(910,400)"/>
+    <wire from="(880,460)" to="(880,520)"/>
+    <wire from="(880,460)" to="(910,460)"/>
+    <wire from="(880,520)" to="(880,580)"/>
+    <wire from="(880,520)" to="(910,520)"/>
+    <wire from="(880,580)" to="(880,640)"/>
+    <wire from="(880,580)" to="(910,580)"/>
+    <wire from="(880,640)" to="(880,700)"/>
+    <wire from="(880,640)" to="(910,640)"/>
+    <wire from="(880,700)" to="(880,760)"/>
+    <wire from="(880,700)" to="(910,700)"/>
+    <wire from="(880,760)" to="(880,820)"/>
+    <wire from="(880,760)" to="(910,760)"/>
+    <wire from="(880,820)" to="(880,880)"/>
+    <wire from="(880,820)" to="(910,820)"/>
+    <wire from="(880,880)" to="(880,940)"/>
+    <wire from="(880,880)" to="(910,880)"/>
+    <wire from="(880,940)" to="(880,1000)"/>
+    <wire from="(880,940)" to="(910,940)"/>
     <wire from="(900,1020)" to="(900,1080)"/>
     <wire from="(900,1020)" to="(920,1020)"/>
     <wire from="(900,1080)" to="(900,1140)"/>
@@ -930,7 +1049,7 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
       <rect fill="#db9656" height="550" rx="10" ry="10" stroke="#000000" stroke-width="2" width="40" x="230" y="70"/>
       <text dominant-baseline="central" font-family="SansSerif" font-size="8" font-weight="bold" text-anchor="middle" x="250" y="307">EX/MEM</text>
       <circ-anchor facing="east" x="270" y="310"/>
-      <circ-port dir="in" pin="420,100" x="230" y="420"/>
+      <circ-port dir="in" pin="420,100" x="240" y="620"/>
       <circ-port dir="in" pin="420,60" x="250" y="620"/>
       <circ-port dir="in" pin="590,550" x="230" y="140"/>
       <circ-port dir="in" pin="590,590" x="230" y="150"/>
@@ -1240,6 +1359,7 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
       <circ-port dir="in" pin="650,360" x="220" y="320"/>
       <circ-port dir="in" pin="650,470" x="220" y="190"/>
       <circ-port dir="in" pin="650,730" x="220" y="540"/>
+      <circ-port dir="in" pin="720,800" x="230" y="550"/>
       <circ-port dir="out" pin="1000,170" x="260" y="460"/>
       <circ-port dir="out" pin="1000,260" x="260" y="400"/>
       <circ-port dir="out" pin="1000,730" x="260" y="540"/>
@@ -1363,6 +1483,10 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
       <a name="label" val="write_unit_output"/>
       <a name="width" val="2"/>
     </comp>
+    <comp lib="0" loc="(720,800)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="ENABLE_WRITE"/>
+    </comp>
     <comp lib="4" loc="(830,170)" name="Register">
       <a name="appearance" val="classic"/>
       <a name="label" val="cu_result"/>
@@ -1397,6 +1521,19 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
     <wire from="(650,360)" to="(800,360)"/>
     <wire from="(650,470)" to="(800,470)"/>
     <wire from="(650,730)" to="(800,730)"/>
+    <wire from="(720,800)" to="(730,800)"/>
+    <wire from="(730,180)" to="(730,270)"/>
+    <wire from="(730,180)" to="(800,180)"/>
+    <wire from="(730,270)" to="(730,370)"/>
+    <wire from="(730,270)" to="(800,270)"/>
+    <wire from="(730,370)" to="(730,480)"/>
+    <wire from="(730,370)" to="(800,370)"/>
+    <wire from="(730,480)" to="(730,700)"/>
+    <wire from="(730,480)" to="(800,480)"/>
+    <wire from="(730,700)" to="(730,740)"/>
+    <wire from="(730,700)" to="(840,700)"/>
+    <wire from="(730,740)" to="(730,800)"/>
+    <wire from="(730,740)" to="(800,740)"/>
     <wire from="(760,200)" to="(760,290)"/>
     <wire from="(760,200)" to="(810,200)"/>
     <wire from="(760,290)" to="(760,390)"/>
@@ -1420,6 +1557,7 @@ fd010113 2112623 2812423 3010413 4*10011 99980 90890 0
     <wire from="(830,360)" to="(1010,360)"/>
     <wire from="(830,470)" to="(1010,470)"/>
     <wire from="(830,730)" to="(1000,730)"/>
+    <wire from="(840,670)" to="(840,700)"/>
     <wire from="(900,560)" to="(1010,560)"/>
     <wire from="(900,590)" to="(1010,590)"/>
     <wire from="(900,620)" to="(1010,620)"/>

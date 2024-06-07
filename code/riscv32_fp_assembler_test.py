@@ -1,5 +1,5 @@
 import pytest
-from riscv32_fp_assembler import *
+import riscv32_fp_assembler as fp_assembler
 
 
 @pytest.mark.parametrize(
@@ -46,4 +46,7 @@ from riscv32_fp_assembler import *
     ],
 )
 def test_binary_encode_rv32f_line(instruction, expected_encoding):
-    assert binary_encode_rv32f_line(instruction, readable=True) == expected_encoding
+    assert (
+        fp_assembler.binary_encode_rv32f_line(instruction, readable=True)
+        == expected_encoding
+    )

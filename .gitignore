@@ -4,3 +4,7 @@ code/__pycache__/rv32i_maps.cpython-312.pyc
 cpu_implementation/cpu_risc_v - Copy.circ
 code/__pycache__/riscv32i_test.cpython-312-pytest-8.2.2.pyc
 code/__pycache__/riscv32_im_assembler.cpython-312.pyc
+code/__pycache__/hex_to_bin.cpython-312.pyc
+code/__pycache__/riscv32_fp_assembler_test.cpython-312-pytest-8.2.2.pyc
+code/__pycache__/riscv32_fp_assembler.cpython-312.pyc
+code/__pycache__/rv32f_maps.cpython-312.pyc
