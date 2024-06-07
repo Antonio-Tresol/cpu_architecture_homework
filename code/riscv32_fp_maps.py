@@ -1,4 +1,4 @@
-RV32F_INSTRUCTION_INFO_MAP = {
+INSTRUCTION_INFO_MAP = {
     "flw": {
         "format": "L",
         "opcode": "0000111",
@@ -104,7 +104,7 @@ RV32F_INSTRUCTION_INFO_MAP = {
         "opcode": "1010011",
     },
 }
-RV32F_FUNCT3_MAP = {
+FUNCT_3_MAP = {
     "flw": "010",
     "fsw": "010",
     "fmadd.s": "000",
@@ -132,13 +132,8 @@ RV32F_FUNCT3_MAP = {
     "fle.s": "000",
     "fclass.s": "111",
 }
-RV32F_FUNCT5_MAP = {
-    "fmadd.s": "00000",
-    "fmsub.s": "00001",
-    "fnmadd.s": "00010",
-    "fnmsub.s": "00011",
-}
-RV32F_FUNCT7_MAP = {
+
+FUNCT_7_MAP = {
     "fadd.s": "0000000",
     "fsub.s": "0000100",
     "fmul.s": "0001000",
@@ -160,6 +155,7 @@ RV32F_FUNCT7_MAP = {
     "fle.s": "0101000",
     "fclass.s": "0111000",
 }
+
 ABI_FLOAT_REGISTER_TO_BINARY_MAP = {
     "f0": "00000",
     "f1": "00001",

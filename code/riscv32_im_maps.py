@@ -1,4 +1,4 @@
-RV32I_INSTRUCTION_INFO_MAP = {
+INSTRUCTION_INFO_MAP = {
     "lui": {  # check
         "format": "U",
         "opcode": "0110111",
@@ -193,7 +193,7 @@ RV32I_INSTRUCTION_INFO_MAP = {
     },
 }
 
-RV32I_FUNCT3_MAP = {
+FUNCT_3_MAP = {
     "jalr": "000",  # check
     "beq": "000",  # check
     "bne": "001",  # check
@@ -241,7 +241,7 @@ RV32I_FUNCT3_MAP = {
     "remu": "111",
 }
 
-RV32I_FUNCT7_MAP = {  # check
+FUNCT_7_MAP = {  # check
     "slli": "0000000",
     "srli": "0000000",
     "srai": "0100000",
