@@ -33,6 +33,8 @@ def raw_assemble_riscv32im(
                 if format == "hex":
                     encoding = binhex.bin_line_to_hex(bin_line=encoding)
                 out_file.write(encoding + "\n")
+    except SystemExit:
+        print("Cancelling Assembling process, exiting.")
     except Exception as e:
         print(f"error in 'raw_assemble_risc32vim_to_hex' -> description: {e}")
 
