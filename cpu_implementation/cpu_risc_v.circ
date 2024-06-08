@@ -9402,51 +9402,6 @@
     <wire from="(570,120)" to="(610,120)"/>
     <wire from="(570,80)" to="(570,120)"/>
   </circuit>
-  <circuit name="UnitSelector">
-    <a name="appearance" val="logisim_evolution"/>
-    <a name="circuit" val="UnitSelector"/>
-    <a name="circuitnamedboxfixedsize" val="true"/>
-    <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(370,170)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="Unit"/>
-      <a name="width" val="3"/>
-    </comp>
-    <comp lib="0" loc="(370,300)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="Write"/>
-    </comp>
-    <comp lib="0" loc="(690,140)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(690,170)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(700,250)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(700,280)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(700,310)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(700,340)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
-    </comp>
-  </circuit>
   <circuit name="fp_signed_inject">
     <a name="appearance" val="custom"/>
     <a name="circuit" val="fp_signed_inject"/>
