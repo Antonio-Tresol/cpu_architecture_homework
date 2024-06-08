@@ -194,6 +194,11 @@
       <a name="labelfont" val="SansSerif bold 8"/>
       <a name="width" val="32"/>
     </comp>
+    <comp lib="0" loc="(2310,1010)" name="Constant">
+      <a name="facing" val="north"/>
+      <a name="value" val="0x0"/>
+      <a name="width" val="32"/>
+    </comp>
     <comp lib="0" loc="(2380,950)" name="Tunnel">
       <a name="label" val="Data_I"/>
       <a name="labelfont" val="SansSerif bold 8"/>
@@ -520,6 +525,8 @@
     <wire from="(2300,930)" to="(2320,930)"/>
     <wire from="(2300,950)" to="(2300,1000)"/>
     <wire from="(2300,950)" to="(2320,950)"/>
+    <wire from="(2310,960)" to="(2310,1010)"/>
+    <wire from="(2310,960)" to="(2320,960)"/>
     <wire from="(2340,570)" to="(2340,930)"/>
     <wire from="(2360,950)" to="(2380,950)"/>
     <wire from="(2400,1040)" to="(2400,1050)"/>
@@ -2248,8 +2255,10 @@
     <wire from="(780,730)" to="(790,730)"/>
     <wire from="(780,760)" to="(780,790)"/>
     <wire from="(780,760)" to="(790,760)"/>
-    <wire from="(780,790)" to="(780,840)"/>
+    <wire from="(780,790)" to="(780,800)"/>
     <wire from="(780,790)" to="(790,790)"/>
+    <wire from="(780,800)" to="(780,840)"/>
+    <wire from="(780,800)" to="(790,800)"/>
     <wire from="(780,840)" to="(780,850)"/>
     <wire from="(780,840)" to="(790,840)"/>
     <wire from="(780,850)" to="(780,860)"/>
@@ -3076,6 +3085,10 @@
       <a name="fanout" val="1"/>
       <a name="incoming" val="7"/>
     </comp>
+    <comp lib="0" loc="(1140,1110)" name="Constant">
+      <a name="value" val="0x4"/>
+      <a name="width" val="32"/>
+    </comp>
     <comp lib="0" loc="(1320,980)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="facing" val="west"/>
@@ -3124,6 +3137,9 @@
       <a name="radix" val="16"/>
       <a name="width" val="32"/>
     </comp>
+    <comp lib="0" loc="(990,1170)" name="Constant">
+      <a name="value" val="0x0"/>
+    </comp>
     <comp lib="0" loc="(990,1210)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="label" val="Funct73"/>
@@ -3170,12 +3186,27 @@
     </comp>
     <comp loc="(1190,900)" name="CUPlexer"/>
     <wire from="(1010,1040)" to="(1020,1040)"/>
+    <wire from="(1010,1050)" to="(1010,1060)"/>
+    <wire from="(1010,1050)" to="(1020,1050)"/>
+    <wire from="(1010,1060)" to="(1010,1170)"/>
+    <wire from="(1010,1060)" to="(1020,1060)"/>
     <wire from="(1030,1210)" to="(1040,1210)"/>
     <wire from="(1040,1110)" to="(1040,1210)"/>
     <wire from="(1060,1070)" to="(1090,1070)"/>
     <wire from="(1090,1070)" to="(1240,1070)"/>
     <wire from="(1090,980)" to="(1090,1070)"/>
     <wire from="(1100,970)" to="(1140,970)"/>
+    <wire from="(1130,1000)" to="(1130,1010)"/>
+    <wire from="(1130,1000)" to="(1140,1000)"/>
+    <wire from="(1130,1010)" to="(1130,1050)"/>
+    <wire from="(1130,1010)" to="(1140,1010)"/>
+    <wire from="(1130,1050)" to="(1160,1050)"/>
+    <wire from="(1130,980)" to="(1130,990)"/>
+    <wire from="(1130,980)" to="(1140,980)"/>
+    <wire from="(1130,990)" to="(1130,1000)"/>
+    <wire from="(1130,990)" to="(1140,990)"/>
+    <wire from="(1140,1110)" to="(1160,1110)"/>
+    <wire from="(1160,1050)" to="(1160,1110)"/>
     <wire from="(1160,920)" to="(1160,940)"/>
     <wire from="(1180,980)" to="(1320,980)"/>
     <wire from="(1190,900)" to="(1300,900)"/>
@@ -3238,6 +3269,7 @@
     <wire from="(970,1090)" to="(970,1140)"/>
     <wire from="(980,1100)" to="(1020,1100)"/>
     <wire from="(980,1100)" to="(980,1120)"/>
+    <wire from="(990,1170)" to="(1010,1170)"/>
     <wire from="(990,1210)" to="(1010,1210)"/>
   </circuit>
   <circuit name="VALU">
