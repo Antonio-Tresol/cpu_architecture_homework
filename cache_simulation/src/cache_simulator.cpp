@@ -1,6 +1,7 @@
 #include "cache_simulator.hpp"
 
 #include <climits>
+#include <iomanip>
 #include <iostream>
 
 RAM ram(1024 * 1024);  // 1MB of RAM
@@ -12,7 +13,7 @@ string accessRAM(int address) {
 
 // Constructor implementation
 CacheSimulator::CacheSimulator(int cacheSize, int blockSize, int associativity,
-                               CacheSimulator *lowerLevel)
+                               CacheSimulator* lowerLevel)
     : cacheSize(cacheSize),
       blockSize(blockSize),
       associativity(associativity),
@@ -31,11 +32,11 @@ CacheSimulator::CacheSimulator(int cacheSize, int blockSize, int associativity,
 
   // write random memory data to RAM
   for (int i = 0; i < 1024; i++) {
-    ram.write(i, "Data" + to_string(i));
+    ram.write(i, to_string(i));
   }
 }
 
-// Access function implementation (for now, just a placeholder)
+// Access function implementation
 bool CacheSimulator::access(int address) {
   int setIndex = getSetIndex(address);
   int tag = getTag(address);
@@ -55,28 +56,48 @@ bool CacheSimulator::access(int address) {
     string data = accessRAM(address);  // Simulate fetching from RAM
     updateCache(setIndex, tag, data);
 
-    toString();
+    displayCache();
     return hitLowerLevel;
   }
 }
 
-void CacheSimulator::toString() {
-  for (std::size_t i = 0; i < cache.size(); i++) {
-    cout << "Set " << i << ": ";
-    for (int j = 0; j < associativity; j++) {
-      cout << "Tag: " << cache[i][j].tag << " Valid: " << cache[i][j].valid
-           << " Last Used: " << cache[i][j].lastUsedTime << " || ";
-      cout << "Data: ";
-      for (auto &d : cache[i][j].data) {
-        cout << d << " ";
-      }
+void CacheSimulator::printHeaders() const {
+  printSeparatorLine();
+  cout << "Cache Level " << cacheLevel << ":\n";
+  cout << left << setw(8) << "Set" << setw(12) << "Tag" << setw(8) << "Valid"
+       << setw(12) << "Last Used" << setw(20) << "Data" << endl;
+  printSeparatorLine();
+}
 
-      cout << " | ";
+void CacheSimulator::printCacheLine(size_t setIndex, int lineIndex) const {
+  // Print set number only once per row, then align other columns
+  cout << left << setw(8) << (lineIndex == 0 ? to_string(setIndex) : "")
+       << setw(12) << cache[setIndex][lineIndex].tag << setw(8)
+       << cache[setIndex][lineIndex].valid << setw(12)
+       << cache[setIndex][lineIndex].lastUsedTime << setw(20);
+
+  if (cache[setIndex][lineIndex].data.empty()) {
+    cout << "Empty";
+  } else {
+    for (const auto& d : cache[setIndex][lineIndex].data) {
+      cout << d << " ";
     }
-    cout << endl;
   }
+  cout << endl;
+}
 
-  cout << "level " << cacheLevel << " cache" << endl;
+void CacheSimulator::printSeparatorLine() const {
+  cout << string(60, '-') << endl;
+}
+
+void CacheSimulator::displayCache() {
+  printHeaders();
+  for (std::size_t i = 0; i < cache.size(); i++) {
+    for (int j = 0; j < associativity; j++) {
+      printCacheLine(i, j);
+    }
+    printSeparatorLine();
+  }
 }
 
 int CacheSimulator::getSetIndex(int address) {

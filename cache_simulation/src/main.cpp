@@ -12,17 +12,17 @@ int main() {
 
   // 1. Force RAM Accesses (Cold Misses):
   cout << "---- Forcing RAM Accesses (Cold Misses) ----" << endl;
-  for (int i = 0; i < 90; ++i) {
+  for (int i = 0; i < 5; ++i) {
     l2Cache.access(i * 64);
   }
 
   cout << "\n---- Forcing L2 Hits ----" << endl;
-  for (int i = 0; i < 16; ++i) {
+  for (int i = 0; i < 2; ++i) {
     l1Cache.access(i * 64);
   }
 
   cout << "\n---- Forcing L1 hits ----" << endl;
-  for (int i = 0; i < 25; ++i) {
+  for (int i = 0; i < 2; ++i) {
     l1Cache.access(i * 64);
   }
 

@@ -21,7 +21,7 @@ class CacheSimulator {
   CacheSimulator(int cacheSize, int blockSize, int associativity,
                  CacheSimulator *lowerLevel = nullptr);
   bool access(int address);
-  void toString();
+  void displayCache();
 
   int cacheLevel = 1;
 
@@ -42,4 +42,7 @@ class CacheSimulator {
   bool searchCache(int setIndex, int tag);
 
   void updateCache(int setIndex, int tag, string data);
+  void printHeaders() const;
+  void printCacheLine(size_t i, int j) const;
+  void printSeparatorLine() const;
 };
