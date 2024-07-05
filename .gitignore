@@ -15,3 +15,5 @@ code/.vscode/launch.json
 cache_simulation/.vscode
 cache_simulation/out
 cache_simulation/cache_sim
+cache_simulation/bin/
+cache_simulation/build/

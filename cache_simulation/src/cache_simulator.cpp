@@ -61,7 +61,7 @@ bool CacheSimulator::access(int address) {
 }
 
 void CacheSimulator::toString() {
-  for (int i = 0; i < cache.size(); i++) {
+  for (std::size_t i = 0; i < cache.size(); i++) {
     cout << "Set " << i << ": ";
     for (int j = 0; j < associativity; j++) {
       cout << "Tag: " << cache[i][j].tag << " Valid: " << cache[i][j].valid
