@@ -9,9 +9,12 @@
 
 using namespace std;
 
+enum class WritePolicy { WRITE_THROUGH, WRITE_BACK };
+
 struct CacheLine {
   int tag;
   bool valid;
+  bool dirty;
   int lastUsedTime;
   vector<string> data;
 };
@@ -19,9 +22,11 @@ struct CacheLine {
 class CacheSimulator {
  public:
   CacheSimulator(int cacheSize, int blockSize, int associativity,
-                 CacheSimulator *lowerLevel = nullptr);
-  bool access(int address);
+                 CacheSimulator* lowerLevel = nullptr,
+                 WritePolicy writePolicy = WritePolicy::WRITE_BACK); 
+  bool access(int address, bool isWrite = false);
   void displayCache();
+  void displayRAM();
 
   int cacheLevel = 1;
 
@@ -29,11 +34,12 @@ class CacheSimulator {
   int cacheSize;
   int blockSize;
   int associativity;
+  WritePolicy writePolicy;
 
   vector<vector<CacheLine>> cache;
 
   int currentTime = 0;
-  CacheSimulator *lowerLevelCache = nullptr;
+  CacheSimulator* lowerLevelCache = nullptr;
 
   int getSetIndex(int address);
 
@@ -42,6 +48,10 @@ class CacheSimulator {
   bool searchCache(int setIndex, int tag);
 
   void updateCache(int setIndex, int tag, string data);
+
+  void handleWrite(int setIndex, int tag, string data);
+  int getAddressFromTagSet(int tag, int setIndex); 
+
   void printHeaders() const;
   void printCacheLine(size_t i, int j) const;
   void printSeparatorLine() const;
